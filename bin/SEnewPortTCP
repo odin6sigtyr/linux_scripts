@@ -1,0 +1,13 @@
+#!/bin/bash
+
+NC="\033[00m"
+green="\033[00;32m"
+GREEN="\033[01;32m"
+brown="\033[00;33m"
+YELLOW="\033[01;33m"
+
+echo -e "${GREEN}SELinux Port MNGMT${NC}"
+echo -e "${YELLOW}Which TCP port would you like open?${NC}"
+read port
+
+semanage port -a -t http_port_t -p tcp $port

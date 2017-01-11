@@ -1,0 +1,63 @@
+#!/bin/bash
+#Colours
+white="\033[00;37m"
+WHITE="\033[01;37m"
+
+magen="\033[00;35m"
+MAGEN="\033[01;35m"
+
+cyan="\033[00;36m"
+CYAN="\033[01;36m"
+
+green="\033[00;32m"
+GREEN="\033[01;32m"
+
+brown="\033[00;33m"
+YELLOW="\033[01;33m"
+
+red="\033[00;31m"
+RED="\033[01;31m"
+
+blue="\033[00;34m"
+BLUE="\033[01;34m"
+
+purp="\033[00;35m"
+PURP="\033[01;35m"
+
+orange="\033[38;5;202m"
+NC="\033[00m" # NC is Natrual Colour
+
+echo -e "
+\t${RED}############################################## ${NC}
+\t${PURP}#${NC} Welcome to ${BLUE}`hostname`
+\t${PURP}#${NC} This system is running $CYAN `cat /etc/redhat-release` $NC
+\t${PURP}#${NC} kernel is $GREEN `uname -r` $NC
+\t${PURP}#${NC} You are logged in as $YELLOW `whoami` $NC
+\t${RED}############################################### ${NC} "
+##########################
+cpu_model=`cat /proc/cpuinfo | awk '/model name/ && !/awk/ {print $4,$5,$6,$7,$8,$9|"sort -u" }'`
+cpu_vend=`cat /proc/cpuinfo | awk '/vendor/ && !/awk/ {print $3 | "sort -u"}'`
+total_Mem=`free -h | awk '/Mem/ && !/awk/ {print $2}'`
+Mem_used=`free -h | awk '/Mem/ && !/awk/ {print $3}'`
+free_Mem=`free -h | awk '/Mem/ && !/awk/ {print $4}'`
+avail_Mem=`free -h | awk '/Mem/ && !/awk/ {print $7}'`
+Size=`df -h | awk '/sda3/ && !/awk/ {print $2}'`
+Used=`df -h | awk '/sda3/ && !/awk/ {print $3}'`
+Avil=`df -h | awk '/sda3/ && !/awk/ {print $4}'`
+used=`df -h | awk '/sda3/ && !/awk/ {print $5}'`
+IP=`ifconfig | awk -v i=2 -v j=2 'FNR == i {print $j}'`
+##########################
+echo -e "\t\t\t${orange}***System***Info***
+ ${WHITE}CPU Vendor : ${YELLOW}$cpu_vend
+ ${WHITE}CPU Model  : ${YELLOW}$cpu_model \n
+ ${WHITE}Total RAM  : ${YELLOW}$total_Mem
+ ${WHITE}Used  RAM  : ${YELLOW}$Mem_used
+ ${WHITE}Free  RAM  : ${YELLOW}$free_Mem
+ ${WHITE}Avail RAM  : ${YELLOW}$avail_Mem \n
+ ${WHITE}HDD Size   : ${YELLOW}$Size
+ ${WHITE}HDD Used   : ${YELLOW}$Used
+ ${WHITE}Aval HDD   : ${YELLOW}$Avil
+ ${WHITE}HDD Used%  : ${YELLOW}$used
+ ${WHITE}Your IP    : ${YELLOW}$IP
+ ${NC}" 
+sh /root/bin/cpu_alert

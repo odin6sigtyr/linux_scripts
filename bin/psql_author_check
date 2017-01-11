@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo "Please enter the book's ID"
+read ID
+
+
+
+psql -h localhost -d booktown -U postgres -c "SELECT books.title, authors.first_name, authors.last_name
+						FROM books
+						INNER JOIN authors
+						on authors.id = books.author_id
+						where books.id = $ID ; "

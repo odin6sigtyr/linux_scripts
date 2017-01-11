@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo enter a digit 
+read digit
+echo you entered $digit

@@ -1,0 +1,1 @@
+nano -c -w /etc/httpd/conf/httpd.conf

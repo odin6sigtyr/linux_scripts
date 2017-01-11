@@ -1,0 +1,13 @@
+#!/bin/bash
+
+
+NC="\033[00m"
+green="\033[00;32m"
+GREEN="\033[01;32m"
+brown="\033[00;33m"
+YELLOW="\033[01;33m"
+
+echo -e "${GREEN}which service to investigate? i.e http${NC}"
+read service
+
+semanage port -l | grep $service

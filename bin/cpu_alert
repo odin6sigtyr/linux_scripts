@@ -1,0 +1,52 @@
+#!/bin/bash
+#Colours
+white="\033[00;37m"
+WHITE="\033[01;37m"
+
+magen="\033[00;35m"
+MAGEN="\033[01;35m"
+
+cyan="\033[00;36m"
+CYAN="\033[01;36m"
+
+green="\033[00;32m"
+GREEN="\033[01;32m"
+
+brown="\033[00;33m"
+YELLOW="\033[01;33m"
+
+red="\033[00;31m"
+RED="\033[01;31m"
+
+blue="\033[00;34m"
+BLUE="\033[01;34m"
+
+purp="\033[00;35m"
+PURP="\033[01;35m"
+
+orange="\033[38;5;202m"
+NC="\033[00m" # NC is Natrual Colour
+
+
+orange="\033[38;5;202m"
+NC="\033[00m" # NC is Natrual Colour
+
+sum=`/root/bin/cpuUsage | awk '{SUM += $1} END {printf "%.0f\n", SUM  } '`
+cause=`/root/bin/cpuUsage`
+
+echo -e "\t\t${WHITE}@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+echo -e "\t\t\t${orange}CPU LEVEL [$sum %]"
+hld=50
+
+if (( $sum < $hld)); 
+then
+	echo -e "\t\t\t${orange}${GREEN}NO CPU hogs detected\n"
+else
+if (($sum > $hld));
+then
+	echo -e ${orange}"\t\t${RED}!!ALERT!!**CPU HOGS DETECTED**\n"
+	echo -e ${YELLOW}"`cpuUsage | awk '{print "\t","\t" $1 ,$2 ,$3 ,$4| "column -t" }'`"
+fi
+fi
+echo -e "\t\t${WHITE}@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+echo -e " ${NC} "
